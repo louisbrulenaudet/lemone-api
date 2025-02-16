@@ -131,7 +131,7 @@ POST http://localhost:8687/api/v1/embeddings
             "embedding": [
                 -0.10794082283973694,
                 0.036172136664390564,
-                ...
+                "..."
             ]
         }
     ]
@@ -233,7 +233,7 @@ It achieves the following results on the evaluation set:
 If you use this code in your research, please use the following BibTeX entry.
 
 ```BibTeX
-@misc{louisbrulenaudet2024,
+@misc{louisbrulenaudet2025,
   author =       {Louis Brulé Naudet},
   title =        {Lemone: the API for french tax law and embeddings computation},
   year =         {2025}
