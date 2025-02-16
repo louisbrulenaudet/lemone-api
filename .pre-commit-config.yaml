@@ -1,0 +1,22 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 'v0.9.3'
+    hooks:
+      - id: ruff
+        name: ruff-check
+        args: [--fix]
+        types: [python]
+      - id: ruff
+        name: ruff_format
+        args: [--fix]
+        types: [python]
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 'v0.5.25'
+    hooks:
+      - id: uv-lock
+      - id: uv-export
+  - repo: https://github.com/microsoft/pyright
+    rev: 'v1.1.393'
+    hooks:
+      - id: pyright
+        types: [python]

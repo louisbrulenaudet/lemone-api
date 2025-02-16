@@ -1,0 +1,83 @@
+services:
+  app:
+    container_name: lemone-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: ["fastapi", "dev", "app/main.py", "--host", "0.0.0.0", "--port", "8687", "--reload"]
+    ports:
+      - "8687:8687"
+    env_file:
+      - .env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=${BROKER_PORT}
+    volumes:
+      - ./app:/app/app
+    restart: unless-stopped
+    depends_on:
+      worker:
+        condition: service_started
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    container_name: lemone-broker
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "6380", "ping"]  # Updated port in healthcheck
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+    ports:
+      - "${BROKER_PORT}:6380"  # Changed internal port to 6380
+    command: redis-server --port 6380 --appendonly yes  # Added port to redis-server command
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  worker:
+    image: louisbrulenaudet/lemone-api:v0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lemone-worker
+    command: [
+      "/app/.venv/bin/dramatiq",
+      "app.workers.tasks",
+      "--processes",
+      "1",
+      "--threads",
+      "4",
+      "--watch",
+      "."
+    ]
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+    env_file:
+      - .env
+    environment:
+      - REDIS_HOST=redis
+      - BROKER_PORT=${BROKER_PORT}
+      - DRAMATIQ_THREADS=1
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  redis_data:

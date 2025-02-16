@@ -1,0 +1,50 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+.env/
+.venv/
+
+# Ignore development tools and editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore Docker artifacts
+docker-compose.yml
+compose.yaml
+.DS_Store
+*.log
+logs/
+tmp/
+*.pid
+
+# Ignore test-related files
+tests/__pycache__/
+tests/*.pyc
+tests/*.pyo
+tests/*.pyd
+.coverage
+htmlcov/
+junit.xml
+
+# Ignore Makefile and local scripts
+make/
+Makefile
+
+# Ignore Git files
+.git/
+.gitignore
+
+# Ignore unnecessary documentation files
+README.md
+
+# Ignore compiled binaries and temporary files
+*.so
+*.out
+*.o
