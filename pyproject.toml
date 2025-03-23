@@ -19,12 +19,6 @@ classifiers = [
     "Topic :: Text Processing :: General"
 ]
 
-[project.urls]
-Homepage = "https://github.com/louisbrulenaudet/lemone-api"
-Repository = "https://github.com/louisbrulenaudet/lemone-api"
-Issues = "https://github.com/louisbrulenaudet/lemone-api/issues"
-Changelog = "https://github.com/louisbrulenaudet/lemone-api/blob/main/ISSUES.md"
-
 requires-python = ">=3.11"
 dependencies = [
     "accelerate>=1.3.0",
