@@ -18,18 +18,22 @@ dependencies = [
     "sentence-transformers>=3.4.0",
 ]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
     "pre-commit>=4.1.0",
     "pre-commit-uv>=4.1.4",
     "pyright>=1.1.392.post0",
     "pytest>=8.3.4",
+    "pytest-asyncio>=0.23.5",
+    "pytest-cov>=4.1.0",
     "ruff>=0.9.3",
 ]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-addopts = "--maxfail=1 --disable-warnings -q"
+addopts = "--maxfail=1 --disable-warnings -q --cov=app --cov-report=term-missing"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 [tool.ruff.lint]
 select = [
@@ -59,6 +63,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "**/{tests,docs}/*" = [
     "ANN",
+    "E402",
 ]
 
 [tool.logfire]
@@ -77,5 +82,20 @@ quote-style = "double"
 line-ending = "auto"
 
 [tool.ruff.lint.pyupgrade]
-# Preserve types, even if a file imports `from __future__ import annotations`.
 keep-runtime-typing = true
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+]
+ignore_errors = true

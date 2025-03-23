@@ -23,8 +23,18 @@ async def error_handler(request: Request, exc: CoreError) -> JSONResponse:
     Custom exception handler for BusinessLogicError.
     Converts the error into a structured JSON response.
     """
+    # Map specific exceptions to status codes
+    status_codes = {
+        "TaskNotFoundError": 404,
+        "TaskInitalizationError": 500,
+        "ModelRegistryNotFoundError": 404,
+    }
+
+    # Default to 400 if not specified
+    status_code = status_codes.get(exc.__class__.__name__, 400)
+
     return JSONResponse(
-        status_code=400,
+        status_code=status_code,
         content={
             "error": exc.__class__.__name__,
             "message": exc.message,

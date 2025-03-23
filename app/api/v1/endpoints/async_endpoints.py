@@ -38,10 +38,10 @@ async def get_task_status(task_id: str) -> TaskStateResponse:
     This endpoint allows clients to get the status of a task by providing the task ID.
     """
     try:
-        state: TaskStateResponse | None = await task_tracker.get_state(task_id)
-
-        if isinstance(state, TaskStateResponse):
-            return state
+        state = await task_tracker.get_state(task_id)
+        if not state:
+            raise TaskNotFoundError(f"Task with ID '{task_id}' not found")
+        return state
 
     except Exception as exc:
         raise TaskNotFoundError(f"Failed to get task status: {str(exc)}") from exc

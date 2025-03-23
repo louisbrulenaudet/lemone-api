@@ -9,6 +9,11 @@ init: ## Initialize development environment
 	uv pip install -r pyproject.toml --all-extras
 	uv sync
 
+install-dev: ## Install development dependencies
+	@echo "🔧 Installing development dependencies..."
+	uv pip install -e ".[dev]"
+	@echo "✅ Development dependencies installed successfully"
+
 check: ## Run code quality checks
 	@echo "🔍 Running code analysis..."
 	uvx ruff check

@@ -5,6 +5,7 @@ from functools import lru_cache
 from pydantic import model_validator
 from pydantic.fields import Field
 from pydantic_settings import BaseSettings
+from pydantic_settings.main import SettingsConfigDict
 from torch.backends.mps import is_available as is_mps_available
 from torch.cuda import is_available as is_cuda_available
 
@@ -150,14 +151,7 @@ class Settings(BaseSettings):
 
         return self.registry
 
-    class Config:
-        """
-        Configuration for the Pydantic `BaseSettings` class.
-
-        This class specifies that environment variables should be loaded from a `.env` file.
-        """
-
-        env_file = ".env"
+    model_config = SettingsConfigDict(env_file=".env")
 
 
 # Initialize the settings object globally
