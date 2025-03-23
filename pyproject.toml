@@ -3,7 +3,27 @@ name = "lemone"
 version = "0.1.0"
 description = "API for processing french tax related texts using specialized models."
 authors = [{name = "Louis Brulé Naudet", email = "contact@louisbrulenaudet.com"}]
+license = {text = "Apache-2.0"}
 readme = "README.md"
+keywords = ["tax", "nlp", "french", "text-processing", "machine-learning", "api"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: French",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Text Processing :: General"
+]
+
+[project.urls]
+Homepage = "https://github.com/louisbrulenaudet/lemone-api"
+Repository = "https://github.com/louisbrulenaudet/lemone-api"
+Issues = "https://github.com/louisbrulenaudet/lemone-api/issues"
+Changelog = "https://github.com/louisbrulenaudet/lemone-api/blob/main/ISSUES.md"
 
 requires-python = ">=3.11"
 dependencies = [
