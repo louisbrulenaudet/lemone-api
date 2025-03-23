@@ -12,6 +12,11 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6380:6379
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
@@ -36,5 +41,7 @@ jobs:
         uv pip install -r pyproject.toml --all-extras
 
     - name: Run tests with pytest
+      env:
+        BROKER_HOST: localhost
+        BROKER_PORT: 6380
       run: uv run pytest
-
