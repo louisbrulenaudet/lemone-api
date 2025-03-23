@@ -28,7 +28,7 @@ identify==2.6.7
 idna==3.10
 importlib-metadata==8.5.0
 iniconfig==2.0.0
-jinja2==3.1.5
+jinja2==3.1.6
 joblib==1.4.2
 logfire==3.5.3
 markdown-it-py==3.0.0
