@@ -21,7 +21,7 @@ def test_task_status_success(client: TestClient, monkeypatch):
         task_id="test-task-id",
         state=TaskStates.COMPLETED,
         queue_name=QueueNames.EMBEDDING,
-        task_name=TaskNames.EMBEDDING
+        task_name=TaskNames.EMBEDDING,
     )
 
     # Mock task_tracker.get_state
@@ -30,6 +30,7 @@ def test_task_status_success(client: TestClient, monkeypatch):
         return mock_state
 
     from app.workers.tasks import task_tracker
+
     monkeypatch.setattr(task_tracker, "get_state", mock_get_state)
 
     response = client.get("/api/v1/task/status/test-task-id")
@@ -43,10 +44,12 @@ def test_task_status_success(client: TestClient, monkeypatch):
 
 def test_task_status_not_found(client: TestClient, monkeypatch):
     """Test task status retrieval for non-existent task."""
+
     async def mock_get_state(task_id):
         raise TaskNotFoundError(f"Task with ID '{task_id}' not found")
 
     from app.workers.tasks import task_tracker
+
     monkeypatch.setattr(task_tracker, "get_state", mock_get_state)
 
     response = client.get("/api/v1/task/status/non-existent-id")
@@ -62,11 +65,12 @@ def test_embeddings_async_creation(client: TestClient, monkeypatch):
     mock_message.message_timestamp = 1234567890
 
     from app.workers.tasks import embeddings_task
+
     monkeypatch.setattr(embeddings_task, "send", lambda x: mock_message)
 
     response = client.post(
         "/api/v1/embeddings/async",
-        json={"model": Models.LEMONE_EMBED_PRO, "input": "test text"}
+        json={"model": Models.LEMONE_EMBED_PRO, "input": "test text"},
     )
     assert response.status_code == 200
     data = response.json()
@@ -81,15 +85,18 @@ def test_embeddings_async_result(client: TestClient, monkeypatch):
     mock_result = {
         "model": Models.LEMONE_EMBED_PRO,
         "object": ObjectTypes.LIST,
-        "data": [{
-            "input": "test text",
-            "index": 0,
-            "object": ObjectTypes.EMBEDDING,
-            "embedding": [0.1, 0.2, 0.3]
-        }]
+        "data": [
+            {
+                "input": "test text",
+                "index": 0,
+                "object": ObjectTypes.EMBEDDING,
+                "embedding": [0.1, 0.2, 0.3],
+            }
+        ],
     }
 
     from app.services.broker import broker
+
     monkeypatch.setattr(broker, "get_result", lambda **kwargs: mock_result)
 
     response = client.get("/api/v1/embeddings/async/test-task-id")
@@ -109,14 +116,12 @@ def test_similarity_async_creation(client: TestClient, monkeypatch):
     mock_message.message_timestamp = 1234567890
 
     from app.workers.tasks import similarity_task
+
     monkeypatch.setattr(similarity_task, "send", lambda x: mock_message)
 
     response = client.post(
         "/api/v1/similarity/async",
-        json={
-            "model": Models.LEMONE_EMBED_PRO,
-            "input": ["text1", "text2"]
-        }
+        json={"model": Models.LEMONE_EMBED_PRO, "input": ["text1", "text2"]},
     )
     assert response.status_code == 200
     data = response.json()
@@ -131,13 +136,11 @@ def test_similarity_async_result(client: TestClient, monkeypatch):
     mock_result = {
         "model": Models.LEMONE_EMBED_PRO,
         "object": ObjectTypes.LIST,
-        "data": {
-            "object": ObjectTypes.SIMILARITY,
-            "data": [[1.0, 0.8], [0.8, 1.0]]
-        }
+        "data": {"object": ObjectTypes.SIMILARITY, "data": [[1.0, 0.8], [0.8, 1.0]]},
     }
 
     from app.services.broker import broker
+
     monkeypatch.setattr(broker, "get_result", lambda **kwargs: mock_result)
 
     response = client.get("/api/v1/similarity/async/test-task-id")
@@ -156,14 +159,12 @@ def test_classification_async_creation(client: TestClient, monkeypatch):
     mock_message.message_timestamp = 1234567890
 
     from app.workers.tasks import classification_task
+
     monkeypatch.setattr(classification_task, "send", lambda x: mock_message)
 
     response = client.post(
         "/api/v1/classification/async",
-        json={
-            "model": ClassificationModels.LEMONE_ROUTER_L,
-            "input": "test text"
-        }
+        json={"model": ClassificationModels.LEMONE_ROUTER_L, "input": "test text"},
     )
     assert response.status_code == 200
     data = response.json()
@@ -178,15 +179,18 @@ def test_classification_async_result(client: TestClient, monkeypatch):
     mock_result = {
         "model": ClassificationModels.LEMONE_ROUTER_L,
         "object": ObjectTypes.LIST,
-        "data": [{
-            "object": ObjectTypes.CLASSIFICATION,
-            "label": "test",
-            "score": 0.9,
-            "index": 0
-        }]
+        "data": [
+            {
+                "object": ObjectTypes.CLASSIFICATION,
+                "label": "test",
+                "score": 0.9,
+                "index": 0,
+            }
+        ],
     }
 
     from app.services.broker import broker
+
     monkeypatch.setattr(broker, "get_result", lambda **kwargs: mock_result)
 
     response = client.get("/api/v1/classification/async/test-task-id")
@@ -210,7 +214,7 @@ def test_task_creation_error(client: TestClient, monkeypatch):
 
     response = client.post(
         "/api/v1/embeddings/async",
-        json={"model": Models.LEMONE_EMBED_PRO, "input": "test text"}
+        json={"model": Models.LEMONE_EMBED_PRO, "input": "test text"},
     )
     assert response.status_code == 500
     assert response.json()["error"] == "TaskInitalizationError"
@@ -232,10 +236,7 @@ def test_result_retrieval_error(client: TestClient, monkeypatch):
 
 def test_invalid_task_request_format(client: TestClient):
     """Test error handling for invalid task request format."""
-    response = client.post(
-        "/api/v1/embeddings/async",
-        json={"invalid": "format"}
-    )
+    response = client.post("/api/v1/embeddings/async", json={"invalid": "format"})
     assert response.status_code == 422  # Validation error
 
 
@@ -245,7 +246,7 @@ def test_empty_task_input_validation(client: TestClient):
         "/api/v1/embeddings/async",
         json={
             "model": Models.LEMONE_EMBED_PRO,
-            "input": None  # None will trigger a validation error
-        }
+            "input": None,  # None will trigger a validation error
+        },
     )
     assert response.status_code == 422

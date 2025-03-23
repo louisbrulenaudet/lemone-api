@@ -4,21 +4,28 @@ from unittest.mock import MagicMock
 # Create a complete mock dramatiq structure before any imports
 mock_dramatiq = MagicMock()
 mock_dramatiq.middleware = MagicMock()
-mock_dramatiq.middleware.Middleware = type('MockMiddleware', (), {
-    '__init__': lambda *args, **kwargs: None,
-    'after_process_boot': lambda *args, **kwargs: None,
-    'before_consumer_thread_shutdown': lambda *args, **kwargs: None,
-    'after_consumer_thread_shutdown': lambda *args, **kwargs: None,
-})
+mock_dramatiq.middleware.Middleware = type(
+    "MockMiddleware",
+    (),
+    {
+        "__init__": lambda *args, **kwargs: None,
+        "after_process_boot": lambda *args, **kwargs: None,
+        "before_consumer_thread_shutdown": lambda *args, **kwargs: None,
+        "after_consumer_thread_shutdown": lambda *args, **kwargs: None,
+    },
+)
 
 # Create mock broker
 mock_broker = MagicMock()
+
 
 # Create mock cache decorator that just returns the function unchanged
 def mock_cached(*args, **kwargs):
     def decorator(func):
         return func
+
     return decorator
+
 
 # Patch the modules before they're imported
 sys.modules["dramatiq"] = mock_dramatiq
@@ -46,22 +53,16 @@ mock_model.encode.return_value = [
         input="test text",
         index=0,
         object=ObjectTypes.EMBEDDING,
-        embedding=[0.1, 0.2, 0.3]
+        embedding=[0.1, 0.2, 0.3],
     )
 ]
 
 mock_model.similarity.return_value = Similarity(
-    object=ObjectTypes.SIMILARITY,
-    data=[[1.0, 0.8], [0.8, 1.0]]
+    object=ObjectTypes.SIMILARITY, data=[[1.0, 0.8], [0.8, 1.0]]
 )
 
 mock_model.classify.return_value = [
-    Classification(
-        object=ObjectTypes.CLASSIFICATION,
-        label="test",
-        score=0.9,
-        index=0
-    )
+    Classification(object=ObjectTypes.CLASSIFICATION, label="test", score=0.9, index=0)
 ]
 
 # Configure registry mock
@@ -81,6 +82,7 @@ for target, mock_obj in patches:
     patcher.setattr(target, mock_obj, raising=False)
     _mocks.append(patcher)
 
+
 def pytest_sessionfinish(session, exitstatus):
     """Cleanup patches at end of test session."""
     # Clear the monkeypatched attributes
@@ -88,14 +90,23 @@ def pytest_sessionfinish(session, exitstatus):
         mock.undo()
 
     # Remove mocked modules
-    for mod in ["dramatiq", "dramatiq.middleware", "dramatiq_redis", "app.services.broker", "aiocache"]:
+    for mod in [
+        "dramatiq",
+        "dramatiq.middleware",
+        "dramatiq_redis",
+        "app.services.broker",
+        "aiocache",
+    ]:
         sys.modules.pop(mod, None)
+
 
 @pytest.fixture
 def client():
     """Create a test client."""
     from app.main import app
+
     return TestClient(app)
+
 
 @pytest.fixture
 def mock_model_fixture():
