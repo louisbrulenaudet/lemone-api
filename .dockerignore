@@ -48,3 +48,6 @@ README.md
 *.so
 *.out
 *.o
+
+# Ignore asset files
+.assets/

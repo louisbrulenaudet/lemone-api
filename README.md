@@ -1,3 +1,5 @@
+![Thumbnail](https://github.com/louisbrulenaudet/lemone-api/blob/main/assets/thumbnail.png?raw=true)
+
 # Lemone: the API for french tax law and embeddings computation
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Maintainer](https://img.shields.io/badge/maintainer-@louisbrulenaudet-blue) ![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg) ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg) ![Package Manager](https://img.shields.io/badge/package%20manager-uv-purple.svg)
 
