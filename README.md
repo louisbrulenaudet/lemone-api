@@ -1,6 +1,7 @@
 ![Thumbnail](https://github.com/louisbrulenaudet/lemone-api/blob/main/assets/thumbnail.png?raw=true)
 
-# Lemone: the API for french tax law and embeddings computation
+# Lemone: the API for French tax data retrieval and classification.
+
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Maintainer](https://img.shields.io/badge/maintainer-@louisbrulenaudet-blue) ![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg) ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg) ![Package Manager](https://img.shields.io/badge/package%20manager-uv-purple.svg)
 
 The API is tailored to meet the specific demands of information retrieval and classification across large-scale tax-related corpora, supporting the implementation of production-ready Retrieval-Augmented Generation (RAG) applications. Its primary purpose is to enhance the efficiency and accuracy of legal processes in the french taxation domain, with an emphasis on delivering consistent performance in real-world settings, while also contributing to advancements in legal natural language processing research.
@@ -14,6 +15,11 @@ To launch the application and associated services, you need to run:
 ```bash
 make build
 make start
+```
+
+Or using Docker:
+```bash
+docker pull louisbrulenaudet/lemone-api
 ```
 
 # API Documentation
@@ -237,7 +243,7 @@ If you use this code in your research, please use the following BibTeX entry.
 ```BibTeX
 @misc{louisbrulenaudet2025,
   author =       {Louis Brulé Naudet},
-  title =        {Lemone: the API for french tax law and embeddings computation},
+  title =        {Lemone: the API for French tax data retrieval and classification.},
   year =         {2025}
   howpublished = {\url{https://huggingface.co/datasets/louisbrulenaudet/lemone-api}},
 }

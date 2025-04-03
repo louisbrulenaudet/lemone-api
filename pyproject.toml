@@ -1,6 +1,6 @@
 [project]
-name = "lemone"
-version = "0.1.0"
+name = "lemone-api"
+version = "0.1.1"
 description = "API for processing french tax related texts using specialized models."
 authors = [{name = "Louis Brulé Naudet", email = "contact@louisbrulenaudet.com"}]
 license = {text = "Apache-2.0"}
@@ -72,6 +72,8 @@ select = [
 ignore = [
     "B008",
     "E501",
+    "ANN101",
+    "ANN102"
 ]
 
 [tool.ruff.lint.per-file-ignores]
