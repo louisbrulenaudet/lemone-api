@@ -9,7 +9,7 @@ from app.core.config import settings
 app = FastAPI(
     title=settings.name,
     description="API for processing french tax related texts using specialized models.",
-    version="0.1.1",
+    version="0.1.2",
 )
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)

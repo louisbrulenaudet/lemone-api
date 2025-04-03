@@ -2,7 +2,7 @@
 
 # Project configuration
 PROJECT_NAME := Lemone API
-VERSION := 0.1.1
+VERSION := 0.1.2
 
 # Docker configuration
 APP_SERVICE := app

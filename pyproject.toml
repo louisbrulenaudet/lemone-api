@@ -1,6 +1,7 @@
 [project]
 name = "lemone-api"
-version = "0.1.1"
+package = false
+version = "0.1.2"
 description = "API for processing french tax related texts using specialized models."
 authors = [{name = "Louis Brulé Naudet", email = "contact@louisbrulenaudet.com"}]
 license = {text = "Apache-2.0"}
