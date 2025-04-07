@@ -43,7 +43,7 @@ services:
       - app-network
 
   worker:
-    image: louisbrulenaudet/lemone-api:v0.1
+    image: louisbrulenaudet/lemone-api:0.1.2
     build:
       context: .
       dockerfile: Dockerfile
