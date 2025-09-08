@@ -72,7 +72,7 @@ torch==2.6.0
 tqdm==4.67.1
 transformers==4.50.3
 typer==0.15.2
-typing-extensions==4.13.1
+typing-extensions==4.15.0
 typing-inspection==0.4.0
 urllib3==2.3.0
 uvicorn==0.34.0
