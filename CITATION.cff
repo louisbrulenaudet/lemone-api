@@ -5,5 +5,5 @@ authors:
   given-names: "Louis"
   orcid: "https://orcid.org/0000-0001-9111-4879"
 title: "Lemone: the API for French tax data retrieval and classification."
-version: 0.1.2
+version: 0.1.3
 date-released: 2025-02-16

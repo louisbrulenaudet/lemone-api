@@ -2,7 +2,7 @@
 
 # Lemone: the API for French tax data retrieval and classification.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Maintainer](https://img.shields.io/badge/maintainer-@louisbrulenaudet-blue) ![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg) ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg) ![Package Manager](https://img.shields.io/badge/package%20manager-uv-purple.svg)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ![Maintainer](https://img.shields.io/badge/maintainer-@louisbrulenaudet-blue) ![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg) ![Code Style](https://img.shields.io/badge/code%20style-ruff-000000.svg) [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 
 The API is tailored to meet the specific demands of information retrieval and classification across large-scale tax-related corpora, supporting the implementation of production-ready Retrieval-Augmented Generation (RAG) applications. Its primary purpose is to enhance the efficiency and accuracy of legal processes in the french taxation domain, with an emphasis on delivering consistent performance in real-world settings, while also contributing to advancements in legal natural language processing research.
 

@@ -10,6 +10,8 @@ from app._enums import (
 )
 from app.models.models import Classification, Embedding, Similarity
 
+MODEL_USED_FOR_PROCESSING = "Model used for processing"
+
 __all__ = [
     "EmbeddingResponse",
     "SimilarityResponse",
@@ -21,7 +23,7 @@ __all__ = [
 
 class EmbeddingResponse(BaseModel):
     model: Models | str = Field(
-        Models.LEMONE_EMBED_PRO, description="Model used for processing"
+        Models.LEMONE_EMBED_PRO, description=MODEL_USED_FOR_PROCESSING
     )
     object: ObjectTypes = Field(
         default=ObjectTypes.LIST,
@@ -35,7 +37,7 @@ class EmbeddingResponse(BaseModel):
 
 class SimilarityResponse(BaseModel):
     model: Models = Field(
-        default=Models.LEMONE_EMBED_PRO, description="Model used for processing"
+        default=Models.LEMONE_EMBED_PRO, description=MODEL_USED_FOR_PROCESSING
     )
     object: ObjectTypes = Field(
         default=ObjectTypes.LIST,
@@ -50,7 +52,7 @@ class SimilarityResponse(BaseModel):
 class ClassificationResponse(BaseModel):
     model: ClassificationModels = Field(
         default=ClassificationModels.LEMONE_ROUTER_L,
-        description="Model used for processing",
+        description=MODEL_USED_FOR_PROCESSING,
     )
     object: ObjectTypes = Field(
         default=ObjectTypes.LIST,
