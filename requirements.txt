@@ -54,7 +54,7 @@ python-dotenv==1.1.1
 python-multipart==0.0.20
 pyyaml==6.0.2
 redis==6.4.0
-regex==2025.9.1
+regex==2025.9.18
 requests==2.32.5
 rich==14.1.0
 rich-toolkit==0.15.1
